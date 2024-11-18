@@ -1,0 +1,53 @@
+{%extends "base.html"%}
+{% set active_page = 'crawling_media' %}
+{%block title%}Crawl{%endblock%}
+{%block content%}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <input class="form-control mb-4" id="tableSearch" type="text" placeholder="Search">
+        </div>
+        <div class="col">
+            <a href="/crawl_add" class="btn btn-primary float-end">
+                Add Media
+            </a>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Judul</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Penulis</th>
+                    <th scope="col">News Value</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col">Ringkasan</th>
+                    <th scope="col">Media</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {%for crawl in crawl_data%}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{crawl.title}}</td>
+                    <td>{{crawl.news_date}}</td>
+                    <td><a href="{{crawl.link}}" target="_blank">Link</a></td>
+                    <td>{{crawl.author}}</td>
+                    <td>{{"{:,.2f}".format(crawl.news_value)}}</td>
+                    <!-- <td>{{crawl.news_value}}</td> -->
+                    <td>{{crawl.detail}}</td>
+                    <td>{{crawl.summary}}</td>
+                    <td>{{crawl.media}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{%endblock%}
